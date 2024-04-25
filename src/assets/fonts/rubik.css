@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Rubik-black';
+    src: url("rubik/rubik_black.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-black-italic';
+    src: url("rubik/rubik_black_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-bold';
+    src: url("rubik/rubik_bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-bold-italic';
+    src: url("rubik/rubik_bold_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-extra-bold';
+    src: url("rubik/rubik_extra_bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-extra-bold-italic';
+    src: url("rubik/rubik_extra_bold_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-italic';
+    src: url("rubik/rubik_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-light';
+    src: url("rubik/rubik_light.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-light-italic';
+    src: url("rubik/rubik_light_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-medium';
+    src: url("rubik/rubik_medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-medium-italic';
+    src: url("rubik/rubik_medium_italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-regular';
+    src: url("rubik/rubik_regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-semi-bold';
+    src: url("rubik/rubik_semi_bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Rubik-semi-bold-italic';
+    src: url("rubik/rubik_semi_bold_italic.ttf") format("truetype");
+}
