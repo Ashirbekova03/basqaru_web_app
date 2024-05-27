@@ -9,9 +9,5 @@ const app = createApp(App);
 app.use(api);
 app.use(router);
 app.use(YoutubeVue3);
-
-// const AWS = require('aws-sdk');
-// app.config.globalProperties.$AWS = AWS;
-
 app.use(VueTheMask);
 app.mount('#app');

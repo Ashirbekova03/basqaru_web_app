@@ -58,6 +58,8 @@
 
 import utils from "@/utils/utils.js";
 import api from "@/service/api.js";
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import axios from "axios";
 
 export default {
   name: "v-add-category-alert",
@@ -65,7 +67,7 @@ export default {
     return {
       categoryName: "",
       amountLimit: "",
-      imageUrl: "https://t3.ftcdn.net/jpg/04/68/17/58/360_F_468175854_cEU6WqxN6Q504R3L7CkDI38Jkh7tYVH4.jpg",
+      imageUrl: null,
       file: null
     }
   },
@@ -77,15 +79,26 @@ export default {
       this.$emit('close', {...true})
     },
     handleFileUpload(event) {
-      this.selectedFile = event.target.files[0];
-      this.imageUrl = URL.createObjectURL(this.selectedFile);
+      this.file = event.target.files[0];
+      this.imageUrl = URL.createObjectURL(this.file);
     },
     openFileSelector() {
       this.$refs.fileInput.click();
     },
     async addCategory() {
       if (!utils.checkIsEmpty(this.imageUrl, this.categoryName, this.amountLimit)) {
-        this.finallyCreate(this.imageUrl);
+        let formData = new FormData();
+        formData.append('file', this.file);
+        try {
+          const response = await axios.post('http://192.168.0.19:8080/api/image/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          this.finallyCreate("http://192.168.0.19:8080/api/" + response.data);
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
       }
     },
     finallyCreate(fileUrl) {
