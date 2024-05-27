@@ -90,12 +90,12 @@ export default {
         let formData = new FormData();
         formData.append('file', this.file);
         try {
-          const response = await axios.post('http://192.168.0.19:8080/api/image/upload', formData, {
+          const response = await axios.post('http://195.49.210.209:9098/api/image/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           });
-          this.finallyCreate("http://192.168.0.19:8080/api/" + response.data);
+          this.finallyCreate("http://195.49.210.209:9098/api/" + response.data);
         } catch (error) {
           console.error('Error uploading image:', error);
         }

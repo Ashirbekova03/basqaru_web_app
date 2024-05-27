@@ -3,7 +3,7 @@ import $storage from "@/storage";
 
 
 const ERROR_STATUSES = { NOT_AUTHORIZED: 401, FORBIDDEN: 403 };
-const instance = axios.create({baseURL: "http://192.168.0.19:8080/api/"});
+const instance = axios.create({baseURL: "http://195.49.210.209:9098/api/"});
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 
 // instance.defaults.headers.common['Role'] = 'ADMIN';
