@@ -1,4 +1,4 @@
-import {request} from "@/service/utils";
+import {reloadHeader, request} from "@/service/utils";
 
 export default {
 
@@ -13,6 +13,7 @@ export default {
      */
     login(params = {}) {
         return request('post', '/auth/login', params).then((response) => {
+            reloadHeader(response.data);
             return response;
         })
     },

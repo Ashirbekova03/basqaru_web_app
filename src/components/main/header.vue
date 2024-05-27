@@ -21,10 +21,10 @@
         </div>
       </div>
       <div v-else class="user-container">
-        <div class="nav-button">Lessons</div>
-        <div class="nav-button">Analytics</div>
-        <div class="nav-button">Wallet</div>
-        <div class="primary-button">
+        <div class="nav-button" @click="this.$router.push('/lesson')" :class="{'selected-route' : this.$route.name === 'lesson'}" >Lessons</div>
+        <div class="nav-button" @click="this.$router.push('/analytics')" :class="{'selected-route' : this.$route.name === 'analytics'}" >Analytics</div>
+        <div class="nav-button" @click="this.$router.push('/wallet')" :class="{'selected-route' : this.$route.name === 'wallet' || this.$route.name === 'add-transaction'}" >Wallet</div>
+        <div class="primary-button" @click="this.$router.push('/profile')">
           <svg width="159" height="159" viewBox="0 0 159 159" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_666_563)">
               <path d="M79.5 79.5C101.453 79.5 119.25 61.7033 119.25 39.75C119.25 17.7967 101.453 0 79.5 0C57.5467 0 39.75 17.7967 39.75 39.75C39.75 61.7033 57.5467 79.5 79.5 79.5Z" fill="white"/>
@@ -45,17 +45,35 @@
 
 <script>
 
+import local_storage from "@/storage/local_storage.js";
+import api from "@/service/api.js";
+
 export default {
   name: "header-component",
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
       userName: null
     }
   },
   mounted() {
-    this.userName = localStorage.getItem("user_name");
-    this.isLoading = false;
+    this.loadProfile();
+  },
+  methods: {
+    loadProfile() {
+      const token = localStorage.getItem("auth_token");
+
+      if (token) {
+        api.profile.getProfile().then((response) => {
+          this.userName = response.data.fullName;
+          this.isLoading = false;
+        }).catch(() => {
+          this.isLoading = false;
+        });
+      } else {
+        this.isLoading = false;
+      }
+    }
   }
 }
 </script>
@@ -106,4 +124,7 @@ svg {
   flex: 1;
   text-align: end;
 }
+.selected-route {
+  color: #4BC462;
+  }
 </style>

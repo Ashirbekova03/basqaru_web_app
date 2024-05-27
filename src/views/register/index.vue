@@ -55,6 +55,8 @@
 
 import HeaderComponent from "@/components/main/header.vue";
 import FooterComponent from "@/components/main/footer.vue";
+import api from "@/service/api.js";
+import utils from "@/utils/utils.js";
 
 export default {
   name: "index",
@@ -68,7 +70,21 @@ export default {
   },
   methods: {
     doRegister() {
-
+      if (!utils.checkIsEmpty(this.username, this.password, this.email)) {
+        api.auth.register({
+          data: {
+            fullName: this.username,
+            email: this.email,
+            password: this.password
+          }
+        }).then((response) => {
+          this.$router.push('/login');
+        }).catch(() => {
+          alert("Почта уже зарегистрирована!");
+          this.email = "";
+          this.password = "";
+        })
+      }
     }
   }
 }

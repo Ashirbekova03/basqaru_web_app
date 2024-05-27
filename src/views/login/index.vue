@@ -47,6 +47,8 @@
 import HeaderComponent from "@/components/main/header.vue";
 import FooterComponent from "@/components/main/footer.vue";
 import api from "@/service/api.js";
+import utils from "@/utils/utils.js";
+import {reloadHeader} from "@/service/utils.js";
 
 export default {
   name: "index",
@@ -59,18 +61,19 @@ export default {
   },
   methods: {
     doLogin() {
-      api.auth.login({
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      }).then((response) => {
-        const data = response.data;
-        localStorage.setItem("auth_token", data.token);
-        this.$router.push('/');
-      }).catch(() => {
-
-      })
+      if (!utils.checkIsEmpty(this.email, this.password)) {
+        api.auth.login({
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        }).then((response) => {
+          this.$router.push('/');
+        }).catch(() => {
+          alert("Неправильная почта или пароль!")
+          this.password = "";
+        })
+      }
     }
   }
 }

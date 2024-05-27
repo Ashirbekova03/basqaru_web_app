@@ -3,14 +3,25 @@ import $storage from "@/storage";
 
 
 const ERROR_STATUSES = { NOT_AUTHORIZED: 401, FORBIDDEN: 403 };
-const instance = axios.create({baseURL: "http://94.247.129.206:8080/api/"});
+const instance = axios.create({baseURL: "http://192.168.0.19:8080/api/"});
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 
 // instance.defaults.headers.common['Role'] = 'ADMIN';
 
 const auth_token = $storage.local_storage.get('auth_token')
+
 if (auth_token) {
     instance.defaults.headers.common.Authorization = `${auth_token}`;
+}
+
+export const reloadHeader = (data) => {
+    $storage.local_storage.set("auth_token", data.token);
+    instance.defaults.headers.common.Authorization = `${data.token}`;
+}
+
+export const logout = () => {
+    $storage.local_storage.remove("auth_token");
+    instance.defaults.headers.common.Authorization = ``;
 }
 
 const errorHandler = (error) => {
